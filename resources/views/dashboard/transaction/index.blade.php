@@ -36,7 +36,7 @@
         <td>Rp.{{ $tf->price }}</td>
         <td>{{ $tf->created_at }}</td>
         <td>
-          {{-- <a href="dashboard/transaction/{{ $tf->id }}" class="badge bg-info"><span data-feather="eye"></span></a> --}}
+          <a href="/dashboard/transaction/{{ $tf->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
           {{-- <button href="" class="share-btn badge bg-info border-0"><span data-feather="eye"></span></button> --}}
           <form action="/dashboard/transaction/{{ $tf->id }}" class="d-inline" method="POST">
             @method('delete')
