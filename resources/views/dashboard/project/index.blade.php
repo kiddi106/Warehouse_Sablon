@@ -16,7 +16,7 @@
 </div>
   @endif
   <div class="table-responsive">
-    <a href="/dashboard/posts" class="btn btn-primary mb-3"> Create New Project </a>
+    <a href="/dashboard/posts" class="btn btn-primary mb-3"> Create New Supply </a>
     
     <table class="table table-striped table-sm">
       <thead>
@@ -25,6 +25,7 @@
           <th scope="col">#</th>
           <th scope="col">Nama Barang</th>
           <th scope="col">Category</th>
+          <th scope="col">Count</th>
           <th scope="col">Created at</th>
           <th scope="col">Created by</th>
           <th scope="col">Updated at</th>
@@ -40,6 +41,7 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $post->title }}</td>
           <td>{{ $post->category->name }}</td>
+          <td>{{ $post->count }}</td>
           <td>{{ $post->created_at }}</td>
           <td>{{ $post->user->name }}</td>
           <td>{{ $post->updated_at }}</td>

@@ -46,9 +46,8 @@ class DashboardTransaction extends Controller
     {
         $count = $request->count;
         $post = $request->post_id;
-        $price = Post::where('id' , $post)->first();
-        $price = $price->price * $count;
-        
+        $postan = Post::where('id' , $post)->first();
+        $price = $postan->price * $count;
         $validatedData = $request->validate([
             'post_id' => 'required',
             'count' => 'required',
@@ -56,9 +55,13 @@ class DashboardTransaction extends Controller
             'customer' => 'required|max:255',
             
         ]);
+        $kurangi = $postan->count - $count;
+        
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['price'] = $price;
         Transaction::create($validatedData);
+        
+        $postan->update(['count' => $kurangi]);
 
         return redirect('/dashboard/transaction')->with('success','New Transaction Has Been Added!');
     }
@@ -106,9 +109,13 @@ class DashboardTransaction extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $tf)
+    public function destroy($id)
     {
-        Transaction::destroy($tf->id);
+        $tf = Transaction::find($id);
+        $post = Post::find($tf->post_id);
+        $tambah = $tf->count + $post->count;
+        $post->update(['count'=>$tambah]);
+        Transaction::destroy($id);
 
         return redirect('/dashboard/transaction')->with('success','Project Has Been Deleted!');
     }

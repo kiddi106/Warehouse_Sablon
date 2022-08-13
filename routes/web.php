@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardCategoriesController;
 use App\Models\Post;
 use App\Models\User;
@@ -66,9 +67,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::resource('/dashboard/users', DashboardUserController::class);
 
 
-Route::get('/dashboard', function(){
-    return view('dashboard.index');
-})->middleware('auth');
+Route::get('/dashboard', [Controller::class, 'index'])->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 Route::resource('/dashboard/project', DashboardProjectController::class)->middleware('auth');
