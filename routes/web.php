@@ -68,6 +68,7 @@ Route::resource('/dashboard/users', DashboardUserController::class);
 
 
 Route::get('/dashboard', [Controller::class, 'index'])->middleware('auth');
+Route::get('/dashboard/report-today', [Controller::class, 'updateReport'])->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 Route::resource('/dashboard/project', DashboardProjectController::class)->middleware('auth');

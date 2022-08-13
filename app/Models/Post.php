@@ -16,6 +16,7 @@ class Post extends Model
     // protected $fillable = ['title','excerpt','body'];
 
     protected $guarded =['id'];
+    protected $dates = ['updated_at'];
     protected $with =['user','category'];
 
     public function scopeFilter($query, array $filters){

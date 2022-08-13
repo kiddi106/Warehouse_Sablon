@@ -189,6 +189,7 @@
       </div>
   </div>
   
+  
   <div class="card">
       <div>
           <div class="numbers">{{ $category->count() }}</div>
@@ -209,7 +210,7 @@
   </div>
 </div>
 <div class="details">
-  
+    <a href="/dashboard/report-today" class="btn btn-success mb-3"> Report Update Stuff Today </a>
   <div class="recentCustomer">
       <div class="cardHeader">
           <h2>Recent New Orders</h2>
