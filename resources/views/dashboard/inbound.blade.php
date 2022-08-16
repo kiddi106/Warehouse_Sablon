@@ -268,7 +268,7 @@ footer p {
                     </div>
                     <div class="row extra-info p">
                         <div class="col-12 bb">
-                            <h5>Title: <span>Report Updating Entry & Checkout Stuff Today</span></h5>
+                            <h5>Title: <span>Report Inbound Stuff</span></h5>
                         </div>
                         
                     </div>
@@ -278,12 +278,11 @@ footer p {
             <section class="product-area mt-4">
                 <table class="table table-hover">
                     <thead>
-                        <h5 class="bb">Title: <span>Report Updating Entry </span></h5>
                         <tr>
                             <td>Stuff</td>
                             <td>Category</td>
                             <td>Updated By</td>
-                            <td>Count</td>
+                            <td>What updated ?</td>
                             <td>Date & Time</td>
 
                         </tr>
@@ -293,34 +292,46 @@ footer p {
                             <td>
                                 <div class="media">
                                     <div class="media-body">
-                                        @foreach ($all as $item)
+                                        @foreach ($dummy as $item)
                                             <h5>{{ $item->title }}</h5>
                                         @endforeach
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                @foreach ($all as $item =>$value)
+                                @foreach ($dummy as $item =>$value)
                                    
-                                    <h5>{{ $value->name }}</h5>
+                                    <h5>{{ $value->category->name }}</h5>
                                                            
-                                    @endforeach
+                                @endforeach
                                     
                                 
                             </td>
                             <td>
-                                @foreach ($all as $item =>$value)
-                                <h5>{{ $value->username}}</h5>
+                                @foreach ($dummy as $item =>$value)
+                                <h5>{{ $value->user->username}}</h5>
                                 @endforeach
                             </td>
                             <td>
-                                @foreach ($all as $item =>$value)
-                                <h5>{{ $value->count}}</h5>
+                                
+                                @foreach ($dummy as $item =>$value)
+                                @if ($value->count < $value->post->count) 
+                                <h5>Count {{ $value->count }} to {{ $value->post->count }}</h5>
+                                    
+                                
+                                @elseif ($value->price !== $value->post->price) 
+                                <h5>Price {{ $value->price }} to {{ $value->post->price }}</h5>
+
+                                @else()
+                                <h5>Count {{ $value->count }} to {{ $value->post->count }}</h5>
+                                <h5>Price {{ $value->price }} to {{ $value->post->price }}</h5>
+                                @endif
+                                
                                 @endforeach
                             </td>
                             <td>
-                                @foreach ($all as $item =>$value)
-                                <h5>{{ date('D g:i', strtotime($value->updated_at))}}</h5>
+                                @foreach ($dummy as $item =>$value)
+                                <h5>{{ date('F j, Y g:i', strtotime($value->post->updated_at))}}</h5>
                                 @endforeach
                             </td>
                             
@@ -330,60 +341,7 @@ footer p {
                 </table>
             </section>
 
-            <section class="product-area mt-4">
-                <table class="table table-hover">
-                    <thead>
-                        <h5 class="bb">Title: <span>Report Checkout Stuff </span></h5>
-                        <tr>
-                            <td>Stuff</td>
-                            <td>Cashier By</td>
-                            <td>Count</td>
-                            <td>Date & Time</td>
-                            <td>Price</td>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="media-body">
-                                        @foreach ($tf as $item)
-                                            <h7>{{ $item->title }}</h7>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                @foreach ($tf as $item =>$value)
-                                   
-                                    <h7>{{ $value->username }}</h7>
-                                                           
-                                    @endforeach
-                                    
-                                
-                            </td>
-                            <td>
-                                @foreach ($tf as $item =>$value)
-                                <h7>{{ $value->count}}</h7>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach ($tf as $item =>$value)
-                                <h7>{{ date('D g:i', strtotime($value->created_at))}}</h7>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach ($tf as $item =>$value)
-                                <h7>Rp {{ $value->price}}</h7>
-                                @endforeach
-                            </td>
-                            
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </section>
+            
 
             
             

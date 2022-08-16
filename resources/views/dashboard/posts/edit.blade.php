@@ -36,6 +36,15 @@
       @enderror
         </div>
         <div class="mb-3">
+          <label for="count" class="form-label">Price</label>
+          <input type="text" class="form-control @error('count') is-invalid @enderror" id="price" name="price"required value="{{ old('price',$post->price) }}">
+          @error('price')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+      @enderror
+        </div>
+        <div class="mb-3">
           <label for="unit" class="form-label">Unit</label>
           <select class="form-select" name="unit" @error('unit') is-invalid @enderror" id="unit" name="unit"required value="{{ old('unit',$post->unit) }}">
               <option value="pcs"selected>pcs</option>

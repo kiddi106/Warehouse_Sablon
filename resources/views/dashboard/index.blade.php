@@ -211,6 +211,7 @@
 </div>
 <div class="details">
     <a href="/dashboard/report-today" class="btn btn-success mb-3"> Report Update Stuff Today </a>
+    <a href="/dashboard/report-inbound" class="btn btn-info mb-3"> Report Inbound Stuff Today </a>
   <div class="recentCustomer">
       <div class="cardHeader">
           <h2>Recent New Orders</h2>

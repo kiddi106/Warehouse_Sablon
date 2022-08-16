@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\DummyData;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -107,7 +108,8 @@ class DashboardPostController extends Controller
             'category_id'=>'required',
             'body'=>'required',
             'unit'=>'required',
-            'count'=>'required'
+            'count'=>'required',
+            'price'=>'required'
 
         ];
         if($request->slug != $post->slug){
@@ -117,6 +119,16 @@ class DashboardPostController extends Controller
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
+        $datalama['post_id'] = $post->id;
+        $datalama['category_id'] = $post->category_id;
+        $datalama['user_id'] = auth()->user()->id;
+        $datalama['title'] = $post->title;
+        $datalama['count'] = $post->count;
+        $datalama['price'] = $post->price;
+        $datalama['created_at'] = $post->created_at;
+        $datalama['updated_at'] = $post->updated_at;
+        DummyData::create($datalama);
+       
         Post::where('id', $post->id)
         ->update($validatedData);
 

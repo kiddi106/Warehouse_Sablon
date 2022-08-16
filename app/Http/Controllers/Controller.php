@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\DummyData;
 use App\Models\Post;
 use App\Models\Transaction;
 use App\Models\User;
@@ -42,7 +43,7 @@ class Controller extends BaseController
         $all = DB::table('posts as a')
                 ->join('categories as b', 'a.category_id', '=','b.id')
                 ->join('users as c', 'a.user_id' ,'=', 'c.id')
-                ->where('a.created_at','LIKE', $hariIni->format('%Y-m-d%'))
+                ->where('a.updated_at','LIKE', $hariIni->format('%Y-m-d%'))
                 ->select('a.*','b.name','c.username')
                 ->get();
                 // dd($all);
@@ -59,6 +60,57 @@ class Controller extends BaseController
         return view('dashboard.report',[
             'all' => $all,
             'tf' => $tf
+        ]);
+    }
+
+    public function updateInbound()
+    {
+        $hariIni = new DateTime();
+        $created = DB::table('posts as a')
+                ->join('categories as b', 'a.category_id', '=','b.id')
+                ->join('users as c', 'a.user_id' ,'=', 'c.id')
+                ->where('a.created_at','LIKE', $hariIni->format('%Y-m-d%'))
+                ->select('a.*','b.name','c.username')
+                ->get();
+        $post = Post::first();
+        $dummy = DummyData::all();
+        $any = false;
+        // foreach ($dummy as $key => $value) {
+        //     if ($value->category_id !== $value->post->category_id) {
+        //         $any = true;
+        //         $jenis = 'category';
+        //         $awal = $value->category->name;
+        //         $perbedaan['category'] = $value->post->category_id;
+        //     }
+        //     elseif ($value->title !== $value->post->title) {
+        //         $any = true;
+        //         $jenis = 'title';
+        //         $awal = $value->title;
+        //         $perbedaan['title'] = $value->post->title;
+        //     }
+        //     elseif ($value->count < $value->post->count) {
+        //         $any = true;
+        //         $awal = $value->count;
+        //         $jenis = 'count';
+        //         $perbedaan['count'] = $value->post->count;
+        //     }
+        //     elseif ($value->price !== $value->post->price) {
+        //         $any = true;
+        //         $awal = $value->price;
+        //         $jenis = 'price';
+        //         $perbedaan['price'] = $value->post->price;
+        //     }
+            
+            
+        // }
+        
+        return view('dashboard.inbound', [
+            'dummy' => $dummy,
+            'post' => $post,
+            'create' => $created,
+            // 'updated' => $perbedaan,
+            // 'jenis' => $jenis,
+            // 'awal' =>$awal
         ]);
     }
 }
